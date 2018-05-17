@@ -1,0 +1,25 @@
+<style>
+    .ladytop{background-color: #001}
+    .ladytop .nav .right .box a:hover{color:#fff}
+</style>
+<div class="ladytop">
+	<div class="nav">
+		<div class="left"><a href="{:url('index/index')}"><h1 style="color:#fff;font-size:30px;font-style: italic;">乘风波浪</h1></a></div>
+		<div class="right">
+			<div class="box">
+				{volist name="cateres" id="vo"}
+                 <a href="{:url('cate/index',array('cateid'=>$vo['id']))}">{$vo.catename}</a>
+                {/volist}
+			</div>
+		</div>
+	</div>
+</div>
+<div class="hotmenu">
+	<div class="con">热门标签：
+        {volist name="tagsres" id="vo"}
+        <a href="http://blog.cn/index.php/index/search/index?keywords={$vo.tagname}">{$vo.tagname}</a>
+        {/volist}
+    </div>
+</div>
+
+<!--顶部通栏-->
