@@ -1,9 +1,9 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:71:"D:\phpStudy\PHPTutorial\WWW\Blog\public/../app/admin\view\tags\lis.html";i:1525863078;s:66:"D:\phpStudy\PHPTutorial\WWW\Blog\app\admin\view\common\header.html";i:1525659823;s:64:"D:\phpStudy\PHPTutorial\WWW\Blog\app\admin\view\common\left.html";i:1525862985;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:73:"D:\phpStudy\PHPTutorial\WWW\Blog1\public/../app/admin\view\admin\lis.html";i:1525600079;s:67:"D:\phpStudy\PHPTutorial\WWW\Blog1\app\admin\view\common\header.html";i:1525659823;s:65:"D:\phpStudy\PHPTutorial\WWW\Blog1\app\admin\view\common\left.html";i:1525862985;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
-    <title>乘风波浪</title>
+    <title>乘风波浪---管理员列表</title>
 
     <meta name="description" content="Dashboard">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -187,14 +187,14 @@
                 <div class="page-breadcrumbs">
                     <ul class="breadcrumb">
                         <li><a href="#">系统</a></li>
-                        <li class="active">Tags标签管理</li>
+                        <li class="active">用户管理</li>
                     </ul>
                 </div>
                 <!-- /Page Breadcrumb -->
 
                 <!-- Page Body -->
 <div class="page-body">
-<a href="<?php echo url('tags/add'); ?>" type="button" tooltip="添加标签" class="btn btn-sm btn-azure btn-addon"> <i class="fa fa-plus"></i> Add
+<a href="<?php echo url('admin/add'); ?>" type="button" tooltip="添加用户" class="btn btn-sm btn-azure btn-addon"> <i class="fa fa-plus"></i> Add
 </a>
 <a href="javascript:location.replace(location.href)" type="button" tooltip="刷新" class="btn btn-sm btn-success "> <i class="fa fa-plus"></i> 刷新
 </a>
@@ -207,15 +207,16 @@
                         <thead class="">
                             <tr>
                                 <th class="text-center" width="6%">ID</th>
-                                <th class="text-center">标签名称</th>
+                                <th class="text-center">用户名称</th>
                                 <th class="text-center" width="20%">操作</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <?php if(is_array($tags) || $tags instanceof \think\Collection || $tags instanceof \think\Paginator): $i = 0; $__LIST__ = $tags;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+                        <?php if(is_array($res) || $res instanceof \think\Collection || $res instanceof \think\Paginator): $i = 0; $__LIST__ = $res;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
                         <tr>
-                                <td align="center"><?php echo $vo['id']; ?></td>
-                                <td align="center"><?php echo $vo['tagname']; ?></td>
+                            <td align="center"><?php echo $vo['id']; ?></td>
+                                <td align="center"><?php echo $vo['username']; ?></td>
+                                <?php if($vo['id'] != 1): ?>
                                 <td align="center">
                                     <a href="<?php echo url('edit',array('id'=>$vo['id'])); ?>" class="btn btn-primary btn-sm shiny">
                                         <i class="fa fa-edit"></i> 编辑
@@ -224,6 +225,9 @@
                                         <i class="fa fa-trash-o"></i> 删除
                                     </a>
                                 </td>
+                                <?php else: ?>
+                                <td align="center">初始管理员不允许操作</td>
+                                <?php endif; ?>
                             </tr>
                         <?php endforeach; endif; else: echo "" ;endif; ?>
                         </tbody>
@@ -231,9 +235,9 @@
                 </div>
                 <div>
             </div>
+
             </div>
         </div>
-        <div class="page"><?php echo $tags->render(); ?></div>
     </div>
 </div>
 

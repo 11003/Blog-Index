@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:72:"D:\phpStudy\PHPTutorial\WWW\Blog\public/../app/index\view\cate\cate.html";i:1525861445;s:66:"D:\phpStudy\PHPTutorial\WWW\Blog\app\index\view\common\header.html";i:1525913104;s:65:"D:\phpStudy\PHPTutorial\WWW\Blog\app\index\view\common\right.html";i:1525912772;s:66:"D:\phpStudy\PHPTutorial\WWW\Blog\app\index\view\common\footer.html";i:1525516783;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:73:"D:\phpStudy\PHPTutorial\WWW\Blog1\public/../app/index\view\cate\cate.html";i:1525861445;s:67:"D:\phpStudy\PHPTutorial\WWW\Blog1\app\index\view\common\header.html";i:1525913104;s:66:"D:\phpStudy\PHPTutorial\WWW\Blog1\app\index\view\common\right.html";i:1525912772;s:67:"D:\phpStudy\PHPTutorial\WWW\Blog1\app\index\view\common\footer.html";i:1525516783;}*/ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>

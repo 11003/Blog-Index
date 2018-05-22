@@ -1,6 +1,7 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:75:"D:\phpStudy\PHPTutorial\WWW\Blog\public/../app/admin\view\article\edit.html";i:1525783063;s:66:"D:\phpStudy\PHPTutorial\WWW\Blog\app\admin\view\common\header.html";i:1525659823;s:64:"D:\phpStudy\PHPTutorial\WWW\Blog\app\admin\view\common\left.html";i:1525862985;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:72:"D:\phpStudy\PHPTutorial\WWW\Blog1\public/../app/admin\view\cate\lis.html";i:1525693057;s:67:"D:\phpStudy\PHPTutorial\WWW\Blog1\app\admin\view\common\header.html";i:1525659823;s:65:"D:\phpStudy\PHPTutorial\WWW\Blog1\app\admin\view\common\left.html";i:1525862985;}*/ ?>
 <!DOCTYPE html>
-<html><head>
+<html>
+<head>
     <meta charset="utf-8">
     <title>乘风波浪</title>
 
@@ -18,9 +19,7 @@
     <link href="/static/admin/style/demo.css" rel="stylesheet">
     <link href="/static/admin/style/typicons.css" rel="stylesheet">
     <link href="/static/admin/style/animate.css" rel="stylesheet">
-    <script src="/static/admin/utf8-php/ueditor.config.js" type="text/javascript"></script>
-    <script src="/static/admin/utf8-php/ueditor.all.min.js" type="text/javascript"></script>
-    <script src="/static/admin/utf8-php/lang/zh-cn/zh-cn.js" type="text/javascript"></script>
+
 </head>
 <body>
 <!-- 头部 -->
@@ -86,7 +85,7 @@
 
 <div class="main-container container-fluid">
     <div class="page-container">
-        <!-- Page Sidebar -->
+        <!-- Page Sidebar左侧 -->
         <div class="page-sidebar" id="sidebar">
     <!-- Page Sidebar Header-->
     <div class="sidebar-header-wrapper">
@@ -188,99 +187,58 @@
             <div class="page-breadcrumbs">
                 <ul class="breadcrumb">
                     <li><a href="#">系统</a></li>
-                    <li><a href="#" onclick="window.history.go(-1)">文章管理</a></li>
-                    <li class="active">修改文章</li>
+                    <li class="active">栏目管理</li>
                 </ul>
             </div>
             <!-- /Page Breadcrumb -->
 
             <!-- Page Body -->
             <div class="page-body">
+                <a href="<?php echo url('cate/add'); ?>" type="button" tooltip="添加栏目" class="btn btn-sm btn-azure btn-addon"> <i class="fa fa-plus"></i> Add
+                </a>
+                <a href="javascript:location.replace(location.href)" type="button" tooltip="刷新" class="btn btn-sm btn-success "> <i class="fa fa-plus"></i> 刷新
+                </a>
                 <div class="row">
                     <div class="col-lg-12 col-sm-12 col-xs-12">
                         <div class="widget">
-                            <div class="widget-header bordered-bottom bordered-blue">
-                                <span class="widget-caption">修改文章</span>
-                            </div>
                             <div class="widget-body">
-                                <div id="horizontal-form">
-                                    <form class="form-horizontal" role="form" enctype="multipart/form-data" method="post">
-                                        <input type="hidden" name="id" value="<?php echo $artres['id']; ?>">
-                                        <div class="form-group">
-                                            <label for="" class="col-sm-2 control-label no-padding-right">文章标题</label>
-                                            <div class="col-sm-6">
-                                                <input class="form-control" value="<?php echo $artres['title']; ?>" placeholder="" name="title" required="" type="text">
-                                            </div>
-                                        </div>
+                                <div class="flip-scroll">
+                                    <table class="table table-bordered table-hover">
+                                        <thead class="">
+                                        <tr>
+                                            <th class="text-center" width="5%">ID</th>
+                                            <th class="text-center">栏目名称</th>
+                                            <th class="text-center" width="19%">操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php if(is_array($res) || $res instanceof \think\Collection || $res instanceof \think\Paginator): $i = 0; $__LIST__ = $res;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+                                        <tr>
+                                            <td align="center"><?php echo $vo['id']; ?></td>
+                                            <td align="center"><?php echo $vo['catename']; ?></td>
+                                            <td align="center">
+                                                <a href="<?php echo url('edit',array('id'=>$vo['id'])); ?>" class="btn btn-primary btn-sm shiny">
+                                                    <i class="fa fa-edit"></i> 编辑
+                                                </a>
+                                                <a href="<?php echo url('del',array('id'=>$vo['id'])); ?>" onClick="confirm('确实要删除吗')" class="btn btn-danger btn-sm shiny">
+                                                    <i class="fa fa-trash-o"></i> 删除
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <?php endforeach; endif; else: echo "" ;endif; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
 
-                                        <div class="form-group">
-                                            <label for="" class="col-sm-2 control-label no-padding-right">文章关键字</label>
-                                            <div class="col-sm-6">
-                                                <input class="form-control" value="<?php echo $artres['keywords']; ?>" placeholder="" name="keywords" required="" type="text">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="" class="col-sm-2 control-label no-padding-right">文章简介</label>
-                                            <div class="col-sm-6">
-                                                <input class="form-control" value="<?php echo $artres['desc']; ?>" placeholder="" name="desc" required="" type="text">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="" class="col-sm-2 control-label no-padding-right">文章作者</label>
-                                            <div class="col-sm-6">
-                                                <input class="form-control" value="<?php echo $artres['author']; ?>" placeholder="" name="author" required="" type="text">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="" class="col-sm-2 control-label no-padding-right">缩略图</label>
-                                            <div class="col-sm-6">
-                                                <input name="pic"  type="file" style="height: 35px;">
-                                                <img src="<?php echo $artres['pic']; ?>" height="100" alt="">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="" class="col-sm-2 control-label no-padding-right">所属栏目</label>
-                                            <div class="col-sm-6">
-                                                <select name="cateid" id="">
-                                                    <?php if(is_array($cateres) || $cateres instanceof \think\Collection || $cateres instanceof \think\Paginator): $i = 0; $__LIST__ = $cateres;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
-                                                    <option <?php if($vo['id'] == $artres['cateid']): ?>selected="selected"<?php endif; ?> value="<?php echo $vo['id']; ?>"><?php echo $vo['catename']; ?></option>
-                                                    <?php endforeach; endif; else: echo "" ;endif; ?>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="" class="col-sm-2 control-label no-padding-right">是否推荐</label>
-                                            <div class="col-sm-6">
-                                                <div class="col-sm-6">
-                                                    <label for="">
-                                                        <input type="checkbox" name="state" value="$artres['state']" <?php if($artres['state'] == 1): ?>checked="checked"<?php endif; ?> class="checkbox-slider colored-darkred">
-                                                        <span class="text"></span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="" class="col-sm-2 control-label no-padding-right">文章内容</label>
-                                            <div class="col-sm-6">
-                                                <textarea name="content" id="content" cols="64" rows="5"  style="text-indent: 10px;"><?php echo $artres['content']; ?></textarea>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="col-sm-offset-2 col-sm-10">
-                                                <button type="submit" class="btn btn-default">保存信息</button>
-                                            </div>
-                                        </div>
-                                    </form>
+                                <div>
                                 </div>
                             </div>
                         </div>
+                        <div class="page"><?php echo $res->render(); ?></div>
+
                     </div>
                 </div>
+
 
             </div>
             <!-- /Page Body -->
@@ -296,8 +254,6 @@
 <!--Beyond Scripts-->
 <script src="/static/admin/style/beyond.js"></script>
 
-<script type="text/javascript">
-    UE.getEditor('content',{initialFrameWidth:860,initialFrameHeight:220,});
-</script>
+
 
 </body></html>

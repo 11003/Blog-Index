@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:76:"D:\phpStudy\PHPTutorial\WWW\Blog\public/../app/index\view\search\search.html";i:1525860500;s:66:"D:\phpStudy\PHPTutorial\WWW\Blog\app\index\view\common\header.html";i:1525913104;s:65:"D:\phpStudy\PHPTutorial\WWW\Blog\app\index\view\common\right.html";i:1525912772;s:66:"D:\phpStudy\PHPTutorial\WWW\Blog\app\index\view\common\footer.html";i:1525516783;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:75:"D:\phpStudy\PHPTutorial\WWW\Blog1\public/../app/index\view\index\index.html";i:1526702158;s:67:"D:\phpStudy\PHPTutorial\WWW\Blog1\app\index\view\common\header.html";i:1525913104;s:66:"D:\phpStudy\PHPTutorial\WWW\Blog1\app\index\view\common\right.html";i:1525912772;s:67:"D:\phpStudy\PHPTutorial\WWW\Blog1\app\index\view\common\footer.html";i:1525516783;}*/ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -9,15 +9,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <link href="/static/index/style/lady.css" type="text/css" rel="stylesheet" />
 <script type='text/javascript' src='/static/index/style/ismobile.js'></script>
-<script type='text/javascript' src='/static/index/style/bootstrap.css'></script>
 </head>
 <style>
-    .pagination span {
-        padding:0 12px 0 12px;
-    }
-    .pages .plist li{
-        margin-right:3px;
-    }
+    .pagination span{padding:0 13px 0 13px}
 </style>
 <body>
 
@@ -48,48 +42,42 @@
 <!--顶部通栏-->
 
 
-<div class="position">
-搜索：<?php echo $keywords; ?>
-</div>
+<div class="position"></div>
 
 <div class="overall">
 
 	<div class="left">
-        <?php if(is_array($searchres) || $searchres instanceof \think\Collection || $searchres instanceof \think\Paginator): $i = 0; $__LIST__ = $searchres;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
-		<div class="xnews2">
+        <?php if(is_array($artres) || $artres instanceof \think\Collection || $artres instanceof \think\Paginator): $i = 0; $__LIST__ = $artres;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+			<div class="xnews2">
 				<div class="pic">
-                    <a target="_blank" href="<?php echo url('article/index',array('arid'=>$vo['id'])); ?>"><img src="
-                    <?php if($vo['pic'] != ''): ?>
-                        <?php echo $vo['pic']; else: ?>
-                        /static/index/images/error.png
-                    <?php endif; ?>" alt="<?php echo $vo['title']; ?>" /></a>
-                </div>
-			<div class="dec">
-				<h3>
-                    <a target="_blank" href="<?php echo url('article/index',array('arid'=>$vo['id'])); ?>"><?php echo $vo['title']; ?></a>
-                </h3>
-
-				<div class="time"><?php echo date("Y-m-d",$vo['time']); ?></div>
-				    <p><?php echo $vo['desc']; ?> </p>
-
-                <div class="time">
-                    <?php
+                    <a target="_blank" href="20160920156279.html">
+                        <img src="<?php if($vo['pic'] != ''): ?><?php echo $vo['pic']; else: ?>/static/index/images/error.png<?php endif; ?>" alt="<?php echo $vo['title']; ?>"/></a></div>
+				<div class="dec">
+				    <h3>
+                        <a target="_blank" href="<?php echo url('article/index',array('arid'=>$vo['id'])); ?>"><?php echo $vo['title']; ?></a>
+                    </h3>
+				    <div class="time">发布时间：<?php echo date("Y年m月d日",$vo['time']); ?></div>
+                    <p><?php echo $vo['content']; ?></p>
+                    <div class="time">
+                        <?php
                         $arr=explode(',',$vo['keywords']);
                         foreach($arr as $k=>$v){
-                            echo "<a href='http://blog.cn/index.php/index/search/index?keywords=$v'>$v</a> ";
+                        echo "<a href='http://blog.cn/index.php/index/search/index?keywords=$v'>$v</a> ";
                         }
-                    ?>
-                </div>
-			</div>
-		</div>
-        <?php endforeach; endif; else: echo "" ;endif; ?>
-				
-				<div class="pages">
-                    <div class="plist" >
-                        <?php echo $searchres->render(); ?>
+                        ?>
                     </div>
 				</div>
-</div>
+            </div>
+        <?php endforeach; endif; else: echo "" ;endif; ?>
+
+
+				
+				<div class="pages">
+				<div class="plist" >
+				<?php echo $artres->render(); ?>
+				</div>
+				</div>
+	</div>
 
 
     <script>

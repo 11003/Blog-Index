@@ -1,26 +1,23 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:74:"D:\phpStudy\PHPTutorial\WWW\Blog\public/../app/admin\view\article\add.html";i:1525781634;s:66:"D:\phpStudy\PHPTutorial\WWW\Blog\app\admin\view\common\header.html";i:1525659823;s:64:"D:\phpStudy\PHPTutorial\WWW\Blog\app\admin\view\common\left.html";i:1525862985;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:75:"D:\phpStudy\PHPTutorial\WWW\Blog1\public/../app/admin\view\index\index.html";i:1525571151;s:67:"D:\phpStudy\PHPTutorial\WWW\Blog1\app\admin\view\common\header.html";i:1525659823;s:65:"D:\phpStudy\PHPTutorial\WWW\Blog1\app\admin\view\common\left.html";i:1525862985;}*/ ?>
 <!DOCTYPE html>
 <html><head>
 	    <meta charset="utf-8">
-    <title>乘风波浪</title>
+    <title>乘风波浪---后台管理</title>
 
     <meta name="description" content="Dashboard">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!--Basic Styles-->
-    <link href="/static/admin/style/bootstrap.css" rel="stylesheet">
-    <link href="/static/admin/style/font-awesome.css" rel="stylesheet">
-    <link href="/static/admin/style/weather-icons.css" rel="stylesheet">
+    <link href="/static/admin/style/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="/static/admin/style/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="/static/admin/style/weather-icons.css" rel="stylesheet" type="text/css">
 
     <!--Beyond styles-->
     <link id="beyond-link" href="/static/admin/style/beyond.css" rel="stylesheet" type="text/css">
     <link href="/static/admin/style/demo.css" rel="stylesheet">
     <link href="/static/admin/style/typicons.css" rel="stylesheet">
     <link href="/static/admin/style/animate.css" rel="stylesheet">
-    <script src="/static/admin/utf8-php/ueditor.config.js" type="text/javascript"></script>
-    <script src="/static/admin/utf8-php/ueditor.all.min.js" type="text/javascript"></script>
-    <script src="/static/admin/utf8-php/lang/zh-cn/zh-cn.js" type="text/javascript"></script>
     
 </head>
 <body>
@@ -87,7 +84,7 @@
 	
 	<div class="main-container container-fluid">
 		<div class="page-container">
-			 <!-- Page Sidebar -->
+			            <!-- Page Sidebar -->
             <div class="page-sidebar" id="sidebar">
     <!-- Page Sidebar Header-->
     <div class="sidebar-header-wrapper">
@@ -188,100 +185,18 @@
                 <!-- Page Breadcrumb -->
                 <div class="page-breadcrumbs">
                     <ul class="breadcrumb">
-                        <li><a href="#">系统</a></li>
-                        <li><a href="#" onclick="window.history.go(-1)">文章管理</a></li>
-                        <li class="active">添加文章</li>
-                    </ul>
+                                        <li class="active">控制面板</li>
+                                        </ul>
                 </div>
                 <!-- /Page Breadcrumb -->
 
                 <!-- Page Body -->
-<div class="page-body">
-<div class="row">
-    <div class="col-lg-12 col-sm-12 col-xs-12">
-        <div class="widget">
-            <div class="widget-header bordered-bottom bordered-blue">
-                <span class="widget-caption">新增文章</span>
-            </div>
-            <div class="widget-body">
-                <div id="horizontal-form">
-                    <form class="form-horizontal" role="form" enctype="multipart/form-data" method="post">
-
-                        <div class="form-group">
-                            <label for="" class="col-sm-2 control-label no-padding-right">文章标题</label>
-                            <div class="col-sm-6">
-                                <input class="form-control"  placeholder="" name="title" required="" type="text">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="" class="col-sm-2 control-label no-padding-right">文章关键字</label>
-                            <div class="col-sm-6">
-                                <input class="form-control"  placeholder="" name="keywords" required="" type="text">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="" class="col-sm-2 control-label no-padding-right">文章简介</label>
-                            <div class="col-sm-6">
-                                <input class="form-control"  placeholder="" name="desc" required="" type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="col-sm-2 control-label no-padding-right">文章作者</label>
-                            <div class="col-sm-6">
-                                <input class="form-control"  placeholder="" name="author" required="" type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="col-sm-2 control-label no-padding-right">缩略图</label>
-                            <div class="col-sm-6">
-                                <input name="pic"  type="file" style="height: 35px;">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="" class="col-sm-2 control-label no-padding-right">链接标题</label>
-                            <div class="col-sm-6">
-                                <select name="cateid" id="">
-                                    <option>请选择所属栏目</option>
-                                    <?php if(is_array($cateres) || $cateres instanceof \think\Collection || $cateres instanceof \think\Paginator): $i = 0; $__LIST__ = $cateres;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
-                                    <option value="<?php echo $vo['id']; ?>"><?php echo $vo['catename']; ?></option>
-                                    <?php endforeach; endif; else: echo "" ;endif; ?>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="" class="col-sm-2 control-label no-padding-right">是否推荐</label>
-                            <div class="col-sm-6">
-                                <div class="col-sm-6">
-                                    <label for="">
-                                        <input type="checkbox" name="state" value="1" class="checkbox-slider colored-darkred">
-                                        <span class="text"></span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="" class="col-sm-2 control-label no-padding-right">文章内容</label>
-                            <div class="col-sm-6">
-                                <textarea name="content" id="content" cols="64" rows="5"  style="text-indent: 10px;"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-default">保存信息</button>
-                            </div>
-                        </div>
-                    </form>
+                <div class="page-body">
+                    
+				<div style="text-align:center; line-height:1000%; font-size:24px;">
+                乘风波浪 ---个人博客后台
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+                
 
                 </div>
                 <!-- /Page Body -->
@@ -296,8 +211,7 @@
     <script src="/static/admin/style/jquery.js"></script>
     <!--Beyond Scripts-->
     <script src="/static/admin/style/beyond.js"></script>
-    <script type="text/javascript">
-        UE.getEditor('content',{initialFrameWidth:860,initialFrameHeight:220,});
-    </script>
+    
+
 
 </body></html>
