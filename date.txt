@@ -1,0 +1,256 @@
+/*
+Navicat MySQL Data Transfer
+
+Source Server         : localhost
+Source Server Version : 50553
+Source Host           : localhost:3306
+Source Database       : bicks
+
+Target Server Type    : MYSQL
+Target Server Version : 50553
+File Encoding         : 65001
+
+Date: 2018-07-05 22:48:56
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for bk_admin
+-- ----------------------------
+DROP TABLE IF EXISTS `bk_admin`;
+CREATE TABLE `bk_admin` (
+  `id` mediumint(9) NOT NULL AUTO_INCREMENT COMMENT '管理员id',
+  `username` varchar(30) NOT NULL,
+  `password` char(32) NOT NULL COMMENT '管理员密码',
+  `roleid` mediumint(5) NOT NULL COMMENT '角色id',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of bk_admin
+-- ----------------------------
+INSERT INTO `bk_admin` VALUES ('19', 'xiaogang', '21232f297a57a5a743894a0e4a801fc3', '5');
+INSERT INTO `bk_admin` VALUES ('1', 'admin', '21232f297a57a5a743894a0e4a801fc3', '1');
+INSERT INTO `bk_admin` VALUES ('18', 'xiaohong', '21232f297a57a5a743894a0e4a801fc3', '4');
+INSERT INTO `bk_admin` VALUES ('17', 'xiaoming', '21232f297a57a5a743894a0e4a801fc3', '3');
+INSERT INTO `bk_admin` VALUES ('20', 'xiaohai', '21232f297a57a5a743894a0e4a801fc3', '6');
+
+-- ----------------------------
+-- Table structure for bk_article
+-- ----------------------------
+DROP TABLE IF EXISTS `bk_article`;
+CREATE TABLE `bk_article` (
+  `id` mediumint(9) NOT NULL AUTO_INCREMENT COMMENT '文章id',
+  `title` varchar(60) NOT NULL COMMENT '文章标题',
+  `keywords` varchar(100) NOT NULL COMMENT '关键词',
+  `desc` varchar(255) NOT NULL COMMENT '描述',
+  `author` varchar(30) NOT NULL COMMENT '作者',
+  `pic` varchar(160) DEFAULT NULL,
+  `content` text NOT NULL COMMENT '内容',
+  `click` mediumint(9) NOT NULL DEFAULT '0' COMMENT '点击数',
+  `zan` mediumint(9) NOT NULL DEFAULT '0' COMMENT '点赞数',
+  `rec` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0:不推荐 1：推荐',
+  `time` int(10) NOT NULL COMMENT '发布时间',
+  `cateid` mediumint(9) NOT NULL COMMENT '所属栏目',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of bk_article
+-- ----------------------------
+INSERT INTO `bk_article` VALUES ('2', '1', '111', '1', '11', './uploads/20180614/83e21d32531e4c4dae18039ddf2c8444.jpg', '<p>1<br/></p>', '0', '0', '1', '1528936174', '48');
+INSERT INTO `bk_article` VALUES ('3', '21312', '12321', '23121312', '21321', './uploads/20180614/fd13499064a978820ee0864605d2d59a.jpg', '<br><p>1231231<font color=\"#ffcc00\">21211</font><br></p><p><iframe src=\"https://v.qq.com/x/cover/nln5sgivix8i7q2/u00265ld2nv.html\" width=\"640\" height=\"498\"><br></iframe></p><p><br></p>', '0', '0', '0', '1528948767', '48');
+INSERT INTO `bk_article` VALUES ('4', '万达', '万达万达', '万达万达万达万达', '万达', './uploads/20180617/c47dc178828b2d2da3e61a7f630b2643.jpg', '<p>万达</p><p>万达</p><p>万达</p><p>万达</p><h1>万达</h1><p><br></p>', '1', '0', '1', '1529202968', '52');
+
+-- ----------------------------
+-- Table structure for bk_auth_group
+-- ----------------------------
+DROP TABLE IF EXISTS `bk_auth_group`;
+CREATE TABLE `bk_auth_group` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `title` char(100) NOT NULL DEFAULT '',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `rules` char(80) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of bk_auth_group
+-- ----------------------------
+INSERT INTO `bk_auth_group` VALUES ('1', '超级管理员', '1', '15,16,19,18,17,2,3,20,10,1,9,11,14,13,12');
+INSERT INTO `bk_auth_group` VALUES ('2', '链接管理员', '1', '2,3,20,10');
+INSERT INTO `bk_auth_group` VALUES ('3', '配置管理员', '1', '1,9,11,14,13,12');
+
+-- ----------------------------
+-- Table structure for bk_auth_group_access
+-- ----------------------------
+DROP TABLE IF EXISTS `bk_auth_group_access`;
+CREATE TABLE `bk_auth_group_access` (
+  `uid` mediumint(8) unsigned NOT NULL,
+  `group_id` mediumint(8) unsigned NOT NULL,
+  UNIQUE KEY `uid_group_id` (`uid`,`group_id`),
+  KEY `uid` (`uid`),
+  KEY `group_id` (`group_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of bk_auth_group_access
+-- ----------------------------
+INSERT INTO `bk_auth_group_access` VALUES ('1', '1');
+INSERT INTO `bk_auth_group_access` VALUES ('2', '2');
+INSERT INTO `bk_auth_group_access` VALUES ('2', '4');
+INSERT INTO `bk_auth_group_access` VALUES ('3', '3');
+INSERT INTO `bk_auth_group_access` VALUES ('3', '4');
+INSERT INTO `bk_auth_group_access` VALUES ('4', '4');
+INSERT INTO `bk_auth_group_access` VALUES ('28', '3');
+INSERT INTO `bk_auth_group_access` VALUES ('29', '4');
+INSERT INTO `bk_auth_group_access` VALUES ('32', '3');
+INSERT INTO `bk_auth_group_access` VALUES ('33', '4');
+
+-- ----------------------------
+-- Table structure for bk_auth_rule
+-- ----------------------------
+DROP TABLE IF EXISTS `bk_auth_rule`;
+CREATE TABLE `bk_auth_rule` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `name` char(80) NOT NULL DEFAULT '',
+  `title` char(20) NOT NULL DEFAULT '',
+  `type` tinyint(1) NOT NULL DEFAULT '1',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `condition` char(100) NOT NULL DEFAULT '',
+  `pid` mediumint(9) NOT NULL DEFAULT '0',
+  `level` tinyint(1) NOT NULL DEFAULT '0',
+  `sort` int(5) NOT NULL DEFAULT '50',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of bk_auth_rule
+-- ----------------------------
+INSERT INTO `bk_auth_rule` VALUES ('1', 'sys', '系统设置', '1', '1', '', '0', '0', '1');
+INSERT INTO `bk_auth_rule` VALUES ('2', 'link', '友情链接', '1', '1', '', '0', '0', '7');
+INSERT INTO `bk_auth_rule` VALUES ('3', 'link/lst', '链接列表', '1', '1', '', '2', '1', '8');
+INSERT INTO `bk_auth_rule` VALUES ('11', 'conf/lst', '配置列表', '1', '1', '', '1', '1', '2');
+INSERT INTO `bk_auth_rule` VALUES ('10', 'link/add', '添加链接', '1', '1', '', '3', '2', '10');
+INSERT INTO `bk_auth_rule` VALUES ('9', 'conf/conf', '配置项', '1', '1', '', '1', '1', '6');
+INSERT INTO `bk_auth_rule` VALUES ('12', 'conf/add', '添加配置', '1', '1', '', '11', '2', '3');
+INSERT INTO `bk_auth_rule` VALUES ('13', 'conf/del', '配置删除', '1', '1', '', '11', '2', '4');
+INSERT INTO `bk_auth_rule` VALUES ('14', 'conf/edit', '配置编辑', '1', '1', '', '11', '2', '5');
+INSERT INTO `bk_auth_rule` VALUES ('15', 'admin', '管理员', '1', '1', '', '0', '0', '12');
+INSERT INTO `bk_auth_rule` VALUES ('16', 'admin/lst', '管理员列表', '1', '1', '', '15', '1', '13');
+INSERT INTO `bk_auth_rule` VALUES ('17', 'admin/add', '管理员添加', '1', '1', '', '16', '2', '14');
+INSERT INTO `bk_auth_rule` VALUES ('18', 'admin/del', '管理员删除', '1', '1', '', '16', '2', '15');
+INSERT INTO `bk_auth_rule` VALUES ('19', 'admin/edit', '管理员修改', '1', '1', '', '16', '2', '16');
+INSERT INTO `bk_auth_rule` VALUES ('20', 'link/edit', '修改链接', '1', '1', '', '3', '2', '11');
+
+-- ----------------------------
+-- Table structure for bk_cate
+-- ----------------------------
+DROP TABLE IF EXISTS `bk_cate`;
+CREATE TABLE `bk_cate` (
+  `id` mediumint(9) NOT NULL AUTO_INCREMENT COMMENT '栏目id',
+  `catename` varchar(30) NOT NULL COMMENT '栏目名称',
+  `type` tinyint(1) NOT NULL DEFAULT '1' COMMENT '栏目类型：1:文章列表栏目 2:单页栏目3：图片列表',
+  `pc` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'pc端:1,移动端:0',
+  `keywords` varchar(255) NOT NULL COMMENT '栏目关键词',
+  `desc` varchar(255) NOT NULL COMMENT '栏目描述',
+  `content` text NOT NULL COMMENT '栏目内容',
+  `rec_index` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0:不推荐 1：推荐',
+  `rec_bottom` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0:不推荐 1：推荐',
+  `pid` mediumint(9) NOT NULL DEFAULT '0' COMMENT '上级栏目id',
+  `sort` mediumint(9) NOT NULL DEFAULT '50' COMMENT '排序',
+  `class` tinyint(1) NOT NULL DEFAULT '1' COMMENT '栏目级别',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of bk_cate
+-- ----------------------------
+INSERT INTO `bk_cate` VALUES ('1', '关于我们', '2', '1', '关于我们', '关于我们', '<p>关于我们</p>', '0', '0', '0', '50', '1');
+INSERT INTO `bk_cate` VALUES ('2', '车辆展示', '5', '1', '车辆展示', '车辆展示', '<p>车辆展示</p>', '0', '0', '0', '50', '1');
+INSERT INTO `bk_cate` VALUES ('3', '热门车型', '5', '1', '热门车型', '热门车型', '<p>热门车型</p>', '0', '0', '2', '50', '2');
+INSERT INTO `bk_cate` VALUES ('4', '大众', '5', '1', '大众', '大众', '<p>大众</p>', '0', '0', '3', '50', '3');
+INSERT INTO `bk_cate` VALUES ('5', '寒假班', '5', '1', '寒假班', '寒假班', '<p>寒假班</p>', '0', '0', '3', '50', '3');
+INSERT INTO `bk_cate` VALUES ('6', '豪华车型', '5', '1', '豪华车型', '豪华车型', '<p>豪华车型</p>', '0', '0', '2', '50', '2');
+INSERT INTO `bk_cate` VALUES ('7', '宝马', '5', '1', '宝马', '宝马', '<p>宝马</p>', '0', '0', '6', '50', '3');
+INSERT INTO `bk_cate` VALUES ('8', '奔驰', '5', '1', '奔驰', '奔驰', '<p>奔驰</p>', '0', '0', '6', '50', '3');
+INSERT INTO `bk_cate` VALUES ('9', '小型车', '5', '1', '小型车', '小型车', '<p>小型车</p>', '0', '0', '2', '50', '2');
+INSERT INTO `bk_cate` VALUES ('10', '紧凑车型', '5', '1', '紧凑车型', '紧凑车型', '<p>紧凑车型</p>', '0', '0', '2', '50', '2');
+INSERT INTO `bk_cate` VALUES ('11', '新闻资讯', '1', '1', '新闻资讯', '新闻资讯', '<p>新闻资讯</p>', '0', '0', '0', '50', '1');
+INSERT INTO `bk_cate` VALUES ('12', '主要车型', '5', '1', '主要车型', '主要车型', '<p>主要车型</p>', '0', '0', '0', '50', '1');
+
+-- ----------------------------
+-- Table structure for bk_links
+-- ----------------------------
+DROP TABLE IF EXISTS `bk_links`;
+CREATE TABLE `bk_links` (
+  `id` mediumint(9) NOT NULL AUTO_INCREMENT,
+  `title` varchar(60) DEFAULT NULL,
+  `desc` varchar(255) DEFAULT NULL,
+  `url` varchar(160) DEFAULT NULL,
+  `sort` mediumint(9) DEFAULT '50',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=gbk;
+
+-- ----------------------------
+-- Records of bk_links
+-- ----------------------------
+INSERT INTO `bk_links` VALUES ('6', '123', '213', 'http://www.123', '50');
+INSERT INTO `bk_links` VALUES ('5', '12321', '1', 'http://www.1', '50');
+INSERT INTO `bk_links` VALUES ('4', 'PHP', 'PHP', 'http://www.php.net', '211');
+
+-- ----------------------------
+-- Table structure for bk_privilege
+-- ----------------------------
+DROP TABLE IF EXISTS `bk_privilege`;
+CREATE TABLE `bk_privilege` (
+  `id` mediumint(5) NOT NULL AUTO_INCREMENT,
+  `pri_name` varchar(20) NOT NULL COMMENT '权限名称',
+  `mname` varchar(20) NOT NULL COMMENT '模块名称',
+  `cname` varchar(20) NOT NULL COMMENT '控制名称',
+  `aname` varchar(20) NOT NULL COMMENT '方法名称',
+  `parentid` mediumint(5) NOT NULL DEFAULT '0' COMMENT '上级权限的id',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=gbk COMMENT='权限表';
+
+-- ----------------------------
+-- Records of bk_privilege
+-- ----------------------------
+INSERT INTO `bk_privilege` VALUES ('1', '管理员', 'admin', 'admin', 'admin', '0');
+INSERT INTO `bk_privilege` VALUES ('7', '添加管理员', 'admin', 'admin', 'add', '6');
+INSERT INTO `bk_privilege` VALUES ('6', '管理员管理', 'admin', 'admin', 'lis', '1');
+INSERT INTO `bk_privilege` VALUES ('8', '文章管理', 'admin', 'article', 'lis', '0');
+INSERT INTO `bk_privilege` VALUES ('9', '文章添加', 'admin', 'article', 'add', '8');
+INSERT INTO `bk_privilege` VALUES ('17', 'RBAC系统管理员', 'admin', 'privilege', 'lis', '0');
+INSERT INTO `bk_privilege` VALUES ('10', '文章修改', 'admin', 'article', 'edit', '8');
+INSERT INTO `bk_privilege` VALUES ('11', '栏目管理', 'admin', 'cate', 'lis', '0');
+INSERT INTO `bk_privilege` VALUES ('12', '栏目添加', 'admin', 'cate', 'add', '11');
+INSERT INTO `bk_privilege` VALUES ('13', '栏目修改', 'admin', 'cate', 'edit', '11');
+INSERT INTO `bk_privilege` VALUES ('14', '链接管理', 'admin', 'links', 'lis', '0');
+INSERT INTO `bk_privilege` VALUES ('15', '链接添加', 'admin', 'links', 'add', '14');
+INSERT INTO `bk_privilege` VALUES ('16', '链接修改', 'admin', 'links', 'edit', '14');
+INSERT INTO `bk_privilege` VALUES ('18', 'RBAC添加', 'admin', 'privilege', 'add', '17');
+INSERT INTO `bk_privilege` VALUES ('19', 'RGAC修改', 'admin', 'privilege', 'edit', '17');
+
+-- ----------------------------
+-- Table structure for bk_role
+-- ----------------------------
+DROP TABLE IF EXISTS `bk_role`;
+CREATE TABLE `bk_role` (
+  `id` mediumint(5) NOT NULL AUTO_INCREMENT,
+  `rolename` varchar(20) NOT NULL COMMENT '角色名称',
+  `pri_id_list` varchar(60) NOT NULL COMMENT '角色权限功能',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=gbk COMMENT='角色表';
+
+-- ----------------------------
+-- Records of bk_role
+-- ----------------------------
+INSERT INTO `bk_role` VALUES ('1', '超级管理员', '*');
+INSERT INTO `bk_role` VALUES ('4', '链接管理员', '14,15,16');
+INSERT INTO `bk_role` VALUES ('3', '栏目管理员', '11,12,13');
+INSERT INTO `bk_role` VALUES ('5', '文章管理员', '8,9,10');
+INSERT INTO `bk_role` VALUES ('6', 'RBAC系统管理员', '17,18,19');
+SET FOREIGN_KEY_CHECKS=1;
